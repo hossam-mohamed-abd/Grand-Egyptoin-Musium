@@ -1,35 +1,34 @@
-# شخصية: مدير النظام
+# Omar Nabil – Site Administrator
 
-## الدور ومن هو
-مسؤول تقني يشرف على تشغيل الموقع واستقراره، ويضمن إعداد الخادم والأمان وتكامل الأصول.
+## Role / Who They Are
+Museum staff member responsible for maintaining site content accuracy and ensuring the web experience runs smoothly.
 
-## الأهداف عند استخدام النظام
-- الحفاظ على توافر الموقع وسرعة الاستجابة.
-- ضبط المسارات وقيم `BASE_URL` لتناسب بيئات النشر المختلفة.
-- مراقبة الأخطاء وتطبيق التصحيحات بسرعة.
+## Goals When Using the System
+- Verify that navigation links and assets load correctly after updates.
+- Publish timely information for events, booking guidance, and donations.
+- Coordinate with developers to resolve routing or hosting issues.
 
-## سير العمل المعتاد
-1. مراجعة ملفات التهيئة في `app/config/config.php` قبل النشر.
-2. تشغيل الخادم أو تهيئة الاستضافة لتوجيه الطلبات إلى `public/index.php`.
-3. التحقق من تحميل الأصول الثابتة من `public/assets` بشكل سليم.
-4. مراقبة السجلات والاستجابة للحوادث.
+## Journey / Workflow
+1. Logs into the hosting environment or CMS replacement (future) to review content updates.
+2. Checks `BASE_URL` and routing configuration when deploying to new environments.
+3. Opens key pages (home, events, plans, kids zone, booking, donate) to validate layout and links.
+4. Monitors visitor feedback about broken links or outdated information and prioritizes fixes.
 
-## المزايا أو الصفحات التي يتفاعل معها
-- ملفات التهيئة في `app/config`.
-- الموجه في `app/core/Router.php` للتأكد من المسارات.
-- الأصول تحت `public/assets/` لضبط صلاحيات الوصول والتخزين المؤقت.
+## Features They Interact With
+- Static pages across `/`, `/plans`, `/event-details`, `/kids-zone`, `/booking`, and `/donate`.
+- Asset hosting and routing configuration under `app/config/config.php` and `app/routes.php`.
+- Error responses (404) when links are incorrect.
 
-## الاحتياجات والتوقعات
-- وثائق واضحة للمسارات والتهيئة.
-- قدرة على تخصيص عناوين الأصول والمسارات بسهولة.
-- آلية بسيطة لمعالجة الأخطاء وإرجاع صفحات 404 أو رسائل ودية.
+## Pain Points / Needs
+- Merge conflicts in configuration can break URLs; needs clear guidance on the correct `BASE_URL` value.
+- Lacks built-in CMS or authentication, so content edits require developer assistance.
+- No analytics or monitoring; relies on manual checks or user reports.
 
-## التحديات المحتملة
-- تعارض قيم `BASE_URL` بين البيئات المختلفة.
-- غياب اختبارات تلقائية قد يصعب كشف المشكلات مبكرًا.
-- إدارة الأذونات على الخادم لضمان تحميل الأصول.
+## Permissions or Limitations
+- Can manage hosting configuration and coordinate deployments.
+- Cannot directly edit templates without code changes unless CMS support is added.
 
-## كيف يساعد النظام في تحقيق أهدافه
-- هيكل MVC مبسط يجعل مواقع الأعطال واضحة ومحددة.
-- توحيد مسارات الأصول عبر ثابت `ASSETS` يقلل أخطاء الروابط.
-- إمكانية توجيه كل الطلبات عبر متحكم أمامي واحد يسهل تطبيق قواعد الأمان.
+## How the System Benefits Them
+- Simple file-based structure is easy to deploy on basic PHP hosting.
+- Shared components reduce the risk of inconsistent navigation across pages.
+- Clear routing map makes it straightforward to verify available pages and URLs.
