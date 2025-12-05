@@ -1,36 +1,37 @@
-# شخصية: المطوّر
+# Salma Farouk – Web Developer
 
-## الدور ومن هو
-عضو في فريق التطوير يعمل على إضافة صفحات جديدة، تحسين القوالب، وتوسيع وظائف الموجه والواجهات.
+## Role / Who They Are
+Software engineer maintaining and extending the museum website, including routing, templates, and assets.
 
-## الأهداف عند استخدام النظام
-- إنشاء أو تعديل صفحات بسرعة مع الحفاظ على تناسق الواجهة.
-- إضافة مسارات جديدة تربط بين العناوين والقوالب المناسبة.
-- اختبار التغييرات محليًا قبل النشر.
+## Goals When Using the System
+- Understand the routing layer and configuration to add new pages safely.
+- Keep navigation and asset links consistent across environments.
+- Refactor templates and components without breaking existing pages.
+- Plan future enhancements such as authentication or CMS integration.
 
-## سير العمل المعتاد
-1. استنساخ المستودع وضبط البيئة المحلية.
-2. تعديل أو إنشاء قالب في `app/views/` أو أحد المجلدات الفرعية.
-3. تحديث `app/routes.php` لإضافة المسار الجديد أو تعديله.
-4. تشغيل خادم PHP المدمج واختبار التصفح.
-5. دفع التعديلات بعد المراجعة.
+## Journey / Workflow
+1. Reviews `README.md` and `docs/code_explained_for_owner.md` to understand architecture.
+2. Clones the repository and configures `BASE_URL` in `app/config/config.php`.
+3. Runs the PHP built-in server from `public/` to preview pages.
+4. Adds or updates routes in `app/routes.php` and templates in `app/views/`.
+5. Reuses components in `app/views/components/` for consistent headers and footers.
+6. Tests all paths (home, plans, booking, collections, donate, kids zone, event details) before deployment.
 
-## المزايا أو الصفحات التي يتفاعل معها
-- القوالب تحت `app/views/` والمكونات المشتركة في `components`.
-- فئة `Controller` ووظيفة `render` لحقن البيانات في القوالب.
-- فئة `Router` لتسجيل المسارات أو الاستجابات المخصصة.
+## Features They Interact With
+- Routing layer in `app/core/Router.php` and route definitions in `app/routes.php`.
+- View templates under `app/views/` and shared components under `app/views/components/`.
+- Asset references using the `ASSETS` constant from `app/config/config.php`.
 
-## الاحتياجات والتوقعات
-- هيكل واضح للمجلدات مع تعليقات توضيحية في الأكواد.
-- ثوابت جاهزة للأصول (`ASSETS`) لتفادي أخطاء الروابط.
-- إمكانية توسيع الموجه أو إضافة وحدات تحكم متخصصة بسهولة.
+## Pain Points / Needs
+- Merge markers in configuration and routes must be resolved to avoid environment-specific breakage.
+- No automated tests; manual verification of pages is required.
+- Lack of dynamic data sources means updates require template edits.
 
-## التحديات المحتملة
-- حل التعارضات المتعلقة بقيمة `BASE_URL` عند العمل في أكثر من بيئة.
-- غياب أمثلة للاختبارات الآلية مما قد يصعب التحقق من الاستقرار.
-- الحاجة إلى إدارة أصول إضافية أو تبعيات خارجية عند توسيع الواجهة.
+## Permissions or Limitations
+- Full access to source code and deployment settings.
+- Must coordinate with admins for content accuracy and with stakeholders for design changes.
 
-## كيف يساعد النظام في تحقيق أهدافه
-- الاعتماد على موجه خفيف يجعل إضافة المسارات واضحة وبسيطة.
-- وجود مكونات واجهة مشتركة يقلل الجهد في بناء الصفحات الجديدة.
-- هيكل MVC مبسط يسهل تتبع تدفق البيانات بين الموجه والقوالب.
+## How the System Benefits Them
+- Minimal stack with few dependencies allows rapid setup and iteration.
+- Custom router and simple controllers make it easy to add routes or integrate future logic.
+- Consistent component structure reduces duplication across pages.

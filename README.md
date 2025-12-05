@@ -1,104 +1,99 @@
-# تجربة الويب لمتحف مصر الكبير
+# Grand Egyptian Museum Web Experience
 
-## وصف المشروع
-منصة ويب خفيفة تعتمد على PHP لعرض تجربة تفاعلية لمتحف مصر الكبير، تتضمن إبراز المعارض والمجموعات والأحداث وسبل الدعم، مع واجهات واضحة تعمل على هيكل MVC مبسط.
+A lightweight PHP web experience that showcases exhibits, events, visit planning resources, and donation options for the Grand Egyptian Museum. The project uses a minimal MVC-inspired structure with a custom router and reusable view components to keep the site easy to extend.
 
-## الهدف والأغراض
-- توفير واجهة معلوماتية تساعد الزوار على استكشاف المعارض والتخطيط للزيارة.
-- تمكين فريق التطوير من توسيع الصفحات بسهولة عبر مسارات وقوالب قابلة لإعادة الاستخدام.
-- إتاحة محتوى ثابت يمكن تحويله لاحقًا إلى محتوى ديناميكي دون إعادة بناء البنية.
+## Main Features
+- Home page highlighting key sections such as events, collections, kids zone, and support options.
+- Dedicated pages for booking guidance, collections overview, event details, visit planning, kids zone content, and donation information.
+- Shared UI components (navigation bar and footer) to maintain consistent styling across pages.
+- Simple routing layer for mapping friendly URLs to PHP view templates.
+- Static assets (CSS, JS, images) served from a single public directory for predictable paths in any hosting environment.
 
-## المزايا الرئيسية
-- صفحة رئيسية تجمع أبرز الأقسام: الأحداث، المجموعات، الموارد التعليمية، والتبرعات.
-- صفحات مخصصة لحجز الزيارات، منطقة الأطفال، تفاصيل الأحداث، والتبرع.
-- مكونات مشتركة للواجهة (رأس، تذييل، شريط تنقل) لضمان اتساق التصميم.
-- طبقة توجيه بسيطة لتحديد المسارات الصديقة وروابطها مع القوالب.
+## Technology Stack
+- **Language:** PHP 8+
+- **Pattern:** Minimal MVC-style organization with a custom router
+- **Frontend:** HTML5, CSS3, Bootstrap, Google Fonts, Font Awesome icons
+- **Static assets:** Stored under `public/assets` (CSS, JS, images)
 
-## التقنيات المستخدمة
-- **اللغة:** PHP 8+
-- **الهيكلية:** نمط MVC مبسط مع موجه مخصص وقاعدة وحدات تحكم.
-- **الواجهة الأمامية:** HTML5، CSS3، Bootstrap، خطوط Google، أيقونات Font Awesome.
-- **الأصول الثابتة:** موجودة تحت `public/assets` وتشمل CSS وJS وصور.
+## System Architecture
+- **Front controller:** `public/index.php` loads configuration, initializes the router, registers routes, and dispatches requests.
+- **Routing:** `app/core/Router.php` normalizes paths, registers GET/POST handlers, and dispatches to closures or view templates defined in `app/routes.php`.
+- **Views:** PHP templates under `app/views/` render each page. Shared components live in `app/views/components/` and are included by individual page templates.
+- **Configuration:** `app/config/config.php` defines constants for the base URL, view path, and asset path. Note: the file currently contains unresolved merge markers for `BASE_URL`; set the correct value before deployment.
+- **Assets:** Served from `public/assets/`, referenced via the `ASSETS` constant to keep URLs portable across environments.
 
-## لمحة عن بنية النظام
-- يعمل `public/index.php` كمتحكم أمامي يستورد الإعدادات ويحوّل كل الطلبات عبر الموجه.
-- يحتوي `app/config/config.php` على الثوابت العامة مثل مسارات المشروع وعنوان الأصول.
-- يدير `app/core/Router.php` تعريفات المسارات ويستدعي القوالب أو الاستجابات المناسبة.
-- يوفر `app/core/Controller.php` وظيفة المساعدة `render` لإرسال البيانات إلى القوالب.
-- تحتفظ مجلدات `app/views/` بالقوالب لكل صفحة بالإضافة إلى المكونات المشتركة.
-- يتم تقديم الأصول من `public/assets/` لضمان عناوين ثابتة بغض النظر عن بيئة النشر.
-
-## هيكل المجلدات والملفات
+## Project Structure
 ```
 .
 ├── app
-│   ├── config
-│   │   └── config.php        # ثوابت عامة مثل BASE_URL ومسارات القوالب والأصول
-│   ├── core
-│   │   ├── Controller.php    # الفئة الأساسية للمتحكم مع دالة render
-│   │   └── Router.php        # موجه بسيط يدعم GET/POST
-│   ├── routes.php            # تعريفات المسارات وروابطها مع القوالب
-│   └── views
-│       ├── components/       # أجزاء واجهة مشتركة مثل شريط التنقل والتذييل
-│       ├── booking/          # قالب صفحة الحجز
-│       ├── Collections/      # قالب صفحة المجموعات
-│       ├── Donate/           # قالب صفحة التبرع
-│       ├── Kids-Zone/        # قالب منطقة الأطفال
-│       ├── plans/            # قالب تخطيط الزيارة
-│       ├── event-details/    # قالب تفاصيل الحدث
-│       ├── regestration/     # قوالب التسجيل وتسجيل الدخول
-│       └── home.php          # الصفحة الرئيسية
+│   ├── config/
+│   │   └── config.php        # Global constants such as BASE_URL, APP_PATH, VIEW_PATH, ASSETS
+│   ├── core/
+│   │   ├── Controller.php    # Base controller with a render helper
+│   │   └── Router.php        # Lightweight router for GET/POST routes
+│   ├── routes.php            # Route definitions mapping paths to view templates
+│   └── views/
+│       ├── components/       # Shared UI parts (navbar, footer)
+│       ├── booking/          # Booking guidance page
+│       ├── Collections/      # Collections overview page
+│       ├── Donate/           # Donation information page
+│       ├── Kids-Zone/        # Kids zone activities page
+│       ├── plans/            # Visit planning page
+│       ├── event-details/    # Event details page
+│       └── home.php          # Homepage
 ├── public
-│   ├── assets/               # ملفات CSS وJS والصور الثابتة
-│   └── index.php             # المتحكم الأمامي وتوصيل الموجه
-└── README.md
+│   ├── assets/               # CSS, JS, fonts, and images
+│   ├── .htaccess             # For Apache URL rewriting to the front controller
+│   └── index.php             # Front controller entry point
+└── docs
+    ├── code_explained_for_owner.md
+    └── personas/             # User personas for the project
 ```
 
-## خطوات التثبيت
-1. **المتطلبات المسبقة:** توفر PHP 8+، ولا توجد حاجة لقاعدة بيانات في الوضع الحالي.
-2. **استنساخ المستودع:**
+## Installation & Setup
+1. **Prerequisites:** PHP 8+; no database is required for the current static content.
+2. **Clone the repository:**
    ```bash
    git clone <repo-url>
    cd Grand-Egyptoin-Musium
    ```
-3. **تهيئة العنوان الأساسي (اختياري):**
-   - افتح `app/config/config.php` وقم بضبط `BASE_URL` إذا كان المشروع سيخدم من مسار فرعي.
-   - تأكد من توجيه خادم الويب إلى مجلد `public/` كجذر للمستندات.
+3. **Configure the base URL (if needed):**
+   - Open `app/config/config.php` and set `BASE_URL` to match your hosting path (e.g., `'/'` for root or `'/GEM_mvc/public/'` for a subdirectory).
+   - Ensure your web server points its document root to the `public/` directory.
 
-## كيفية التشغيل والاستخدام
-- **باستخدام الخادم المدمج في PHP:**
+## How to Run
+- **PHP built-in server (local development):**
   ```bash
   cd public
   php -S localhost:8000
   ```
-  ثم افتح `http://localhost:8000` في المتصفح.
-- **باستخدام خادم ويب آخر:** اضبط الجذر على `public/` ووجّه كل الطلبات إلى `public/index.php`.
+  Then browse to `http://localhost:8000`.
+- **Other web servers:** Point the document root to `public/` and route all requests to `public/index.php` (see `.htaccess` for an Apache example).
 
-## سيناريوهات الاستخدام
-- **تخطيط الزيارة:** من الصفحة الرئيسية اختر "Plan Your Visit" للوصول إلى صفحة التخطيط `/plans` للاطلاع على المعلومات.
-- **استكشاف الأحداث:** من قسم الأحداث اختر "Learn More" للوصول إلى `/event-details` ومعرفة التفاصيل.
-- **نشاطات الأطفال:** الانتقال إلى `/kids-zone` لعرض المحتوى المخصص للصغار.
-- **الحجز:** زيارة `/booking` لمراجعة تعليمات الحجز المتاحة.
-- **دعم المتحف:** زيارة `/donate` للتعرف على خيارات التبرع.
+## Example Workflows
+- **Plan a visit:** Navigate to `/plans` from the home page to review visiting information and logistics.
+- **Explore events:** Visit `/event-details` from the events section to read more about a specific program.
+- **Kids activities:** Open `/kids-zone` to find family-friendly content.
+- **Booking guidance:** Go to `/booking` for instructions on booking visits.
+- **Support the museum:** Visit `/donate` to explore donation options.
 
-## التحسينات المستقبلية
-- إضافة بيانات ديناميكية للأحداث والحجوزات والتبرعات مع طبقة تخزين مناسبة.
-- بناء تدفق مصادقة فعلي ودعم إدارة الصلاحيات.
-- تحسين صفحات الخطأ وإضافة اختبارات آلية لسلامة المسارات والقوالب.
-- معالجة أي علامات دمج متبقية في الملفات وضبط `BASE_URL` بشكل موحد.
+## Routing & Components Overview
+- **Router usage:** Routes are registered in `app/routes.php` using `$router->get('/path', function () { ... });`. The router normalizes paths relative to `BASE_URL` so links remain consistent when deployed in subdirectories.
+- **View rendering:** Page templates include shared components from `app/views/components/` to keep navigation and footer consistent. The base `Controller` class exposes a `render($view, $data = [])` helper for future controllers.
 
+## Future Improvements
+- Resolve merge markers in `app/config/config.php` and `app/routes.php` to avoid ambiguous `BASE_URL` settings.
+- Add dynamic data sources for events, bookings, and donations instead of static content.
+- Implement authentication and role-based access for contributors and admins.
+- Expand error handling and add automated tests for routing and page rendering.
+- Introduce content management hooks for editors to update copy without code changes.
 
-## الشكر والتقدير
-- فريق تجربة الويب لمتحف مصر الكبير وكل المساهمين في المشروع.
-=======
-## Authors & Credits
-- Project contributors: 
-   Eng.hossam Mohamed
-   Eng.mohamed Sayed
-   Eng.Abd-alrahman Ahmed
-   Eng.Ahmed Goda
-   Eng.Milad hany
+## Authors / Credits
+- Eng. Hossam Mohamed
+- Eng. Mohamed Sayed
+- Eng. Abd-alrahman Ahmed
+- Eng. Ahmed Goda
+- Eng. Milad Hany
 
-
-## الترخيص
-- يرجى تحديد رخصة المشروع (مثل MIT) وإضافة ملف `LICENSE` عند اعتمادها.
+## License
+A license has not been declared. If you intend to open-source this project, add a `LICENSE` file (e.g., MIT) and update this section accordingly.

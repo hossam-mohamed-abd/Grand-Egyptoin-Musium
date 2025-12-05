@@ -1,35 +1,37 @@
-# شخصية: الزائر العادي
+# Layla Hassan – Museum Visitor
 
-## الدور ومن هو
-شخص مهتم بالمتحف يريد استكشاف المعارض والتخطيط لزيارة أو التعرف على الأحداث والأنشطة المتاحة.
+## Role / Who They Are
+Leisure traveler visiting Cairo who wants to explore the Grand Egyptian Museum highlights and plan a day trip.
 
-## الأهداف عند استخدام النظام
-- التعرف على المعارض والأحداث الحالية.
-- معرفة مواعيد الزيارة وأسعار التذاكر أو إرشادات الدخول.
-- الوصول إلى محتوى مناسب للعائلة أو الأطفال.
+## Goals When Using the System
+- Quickly see what exhibits and events are available during her visit.
+- Find practical visit details (hours, directions, ticketing guidance).
+- Identify kid-friendly options for younger family members.
+- Decide whether to donate after the visit.
 
-## سير العمل المعتاد
-1. زيارة الصفحة الرئيسية لاستعراض الملخص.
-2. النقر على قسم الأحداث لمعرفة التفاصيل أو التسجيل.
-3. الانتقال إلى صفحة التخطيط أو الحجز لمعرفة التعليمات العملية.
-4. زيارة منطقة الأطفال لمحتوى العائلة عند الحاجة.
+## Journey / Workflow
+1. Lands on the home page to scan featured sections.
+2. Opens **Plan Your Visit** via `/plans` to review hours and logistics.
+3. Checks **Events** and navigates to `/event-details` for programs happening this week.
+4. Visits **Kids Zone** at `/kids-zone` for family activities.
+5. Reads **Booking** guidance at `/booking` before arriving.
+6. Optionally navigates to **Donate** at `/donate` to contribute.
 
-## المزايا أو الصفحات التي يتفاعل معها
-- الصفحة الرئيسية وقسم الأحداث.
-- صفحة التخطيط للزيارة `/plans` وصفحة الحجز `/booking`.
-- منطقة الأطفال `/kids-zone`.
-- صفحة التبرع لدعم المتحف.
+## Features They Interact With
+- Home page hero and section links.
+- Navigation bar and footer for quick access to key pages.
+- Visit planning, event details, booking, kids zone, and donation pages.
 
-## الاحتياجات والتوقعات
-- واجهة بسيطة وسريعة الاستجابة.
-- معلومات واضحة عن المواعيد والموقع والتكلفة.
-- روابط صحيحة وصور وأصول تعمل دون أخطاء.
+## Pain Points / Needs
+- Wants clear, up-to-date information without deep navigation.
+- Needs mobile-friendly pages when browsing on the go.
+- Expects working links; broken assets or incorrect base URLs can cause frustration.
 
-## التحديات المحتملة
-- عدم وجود محتوى ديناميكي قد يجعل المعلومات غير محدثة.
-- الاعتماد على محتوى ثابت بدون نماذج تفاعلية للحجز.
+## Permissions or Limitations
+- Read-only access; cannot modify content.
+- Relies on publicly available information and forms.
 
-## كيف يساعد النظام في تحقيق أهدافه
-- يقدم صفحات مرتبة تسمح بالوصول المباشر إلى الأقسام الرئيسية.
-- يوفر مكونات تصميم متسقة تسهل التنقل وتزيد الثقة.
-- يتيح متابعة مسارات واضحة للزيارة أو الاطلاع على الأحداث.
+## How the System Benefits Them
+- Consolidates museum highlights and logistics in one place.
+- Provides straightforward navigation to plan visits and discover events.
+- Offers donation information for supporting the museum.
