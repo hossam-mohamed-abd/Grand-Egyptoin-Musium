@@ -1,34 +1,36 @@
-# Developer / Maintainer
+# شخصية: المطوّر
 
-## Role
-Engineer responsible for extending functionality, maintaining routing, and ensuring the codebase remains healthy.
+## الدور ومن هو
+عضو في فريق التطوير يعمل على إضافة صفحات جديدة، تحسين القوالب، وتوسيع وظائف الموجه والواجهات.
 
-## Goals
-- Understand the lightweight MVC structure and routing entry points.
-- Add new pages or features without breaking existing routes or assets.
-- Resolve configuration issues (e.g., `BASE_URL` conflicts) for different deployments.
+## الأهداف عند استخدام النظام
+- إنشاء أو تعديل صفحات بسرعة مع الحفاظ على تناسق الواجهة.
+- إضافة مسارات جديدة تربط بين العناوين والقوالب المناسبة.
+- اختبار التغييرات محليًا قبل النشر.
 
-## Typical Journey
-1. Clones the repository and reviews `app/config/config.php` for environment-specific settings.
-2. Checks `app/core/Router.php` and `app/routes.php` to learn how routes map to views.
-3. Adds or updates view templates under `app/views/` and references assets via `ASSETS`.
-4. Runs a local PHP server to verify routing and content rendering.
+## سير العمل المعتاد
+1. استنساخ المستودع وضبط البيئة المحلية.
+2. تعديل أو إنشاء قالب في `app/views/` أو أحد المجلدات الفرعية.
+3. تحديث `app/routes.php` لإضافة المسار الجديد أو تعديله.
+4. تشغيل خادم PHP المدمج واختبار التصفح.
+5. دفع التعديلات بعد المراجعة.
 
-## Features Interacted With
-- Router class and route definitions.
-- Controller base class and view-rendering patterns.
-- Static assets and shared UI components.
+## المزايا أو الصفحات التي يتفاعل معها
+- القوالب تحت `app/views/` والمكونات المشتركة في `components`.
+- فئة `Controller` ووظيفة `render` لحقن البيانات في القوالب.
+- فئة `Router` لتسجيل المسارات أو الاستجابات المخصصة.
 
-## Pain Points, Needs, and Expectations
-- Needs clarity on unresolved merge conflicts to avoid misconfigured `BASE_URL` values.
-- Expects simple testing or linting steps before committing changes (currently absent).
-- Wants documentation on adding dynamic data sources when the project grows.
+## الاحتياجات والتوقعات
+- هيكل واضح للمجلدات مع تعليقات توضيحية في الأكواد.
+- ثوابت جاهزة للأصول (`ASSETS`) لتفادي أخطاء الروابط.
+- إمكانية توسيع الموجه أو إضافة وحدات تحكم متخصصة بسهولة.
 
-## Permissions and Limitations
-- Full repository access; responsible for code quality and deployment readiness.
-- Currently limited by the static nature of pages—no API layer or database integration is present.
+## التحديات المحتملة
+- حل التعارضات المتعلقة بقيمة `BASE_URL` عند العمل في أكثر من بيئة.
+- غياب أمثلة للاختبارات الآلية مما قد يصعب التحقق من الاستقرار.
+- الحاجة إلى إدارة أصول إضافية أو تبعيات خارجية عند توسيع الواجهة.
 
-## How the System Helps
-- Compact codebase with a small set of core files for quick onboarding.
-- Constants and a minimal router make it straightforward to add new pages.
-- Shared components encourage consistent styling across newly added views.
+## كيف يساعد النظام في تحقيق أهدافه
+- الاعتماد على موجه خفيف يجعل إضافة المسارات واضحة وبسيطة.
+- وجود مكونات واجهة مشتركة يقلل الجهد في بناء الصفحات الجديدة.
+- هيكل MVC مبسط يسهل تتبع تدفق البيانات بين الموجه والقوالب.

@@ -1,34 +1,34 @@
-# Parent / Educator
+# شخصية: ولي الأمر أو المربي
 
-## Role
-A parent, teacher, or chaperone looking for child-friendly experiences at the museum.
+## الدور ومن هو
+أب، أم، أو معلم يبحث عن محتوى تعليمي وتجربة آمنة للأطفال أثناء الزيارة أو التعلم عن بُعد.
 
-## Goals
-- Find Kids Zone activities and educational content suitable for children.
-- Plan a visit that accommodates families or school groups.
-- Identify events or workshops tailored to younger audiences.
+## الأهداف عند استخدام النظام
+- العثور على أنشطة أو محتوى مناسب للأطفال.
+- تخطيط زيارة عائلية تشمل تفاصيل الوصول والأمان.
+- الاطلاع على الأحداث التعليمية أو الورش الموجهة للصغار.
 
-## Typical Journey
-1. Navigates to the Kids Zone from the main navigation.
-2. Reviews activity descriptions and any age recommendations.
-3. Checks event details for family-friendly dates and times.
-4. Uses the plans page to arrange logistics for a group visit.
+## سير العمل المعتاد
+1. دخول الصفحة الرئيسية واستعراض الأقسام البارزة.
+2. الانتقال إلى منطقة الأطفال `/kids-zone` لقراءة الأنشطة المتاحة.
+3. فتح صفحة التخطيط `/plans` لمعرفة التعليمات اللوجستية.
+4. مراجعة الأحداث أو الورش في `/event-details` إذا كانت متاحة.
 
-## Features Interacted With
-- Kids Zone page for activities and learning resources.
-- Event details page for workshops or family programs.
-- Plans page for schedules and practical guidance.
+## المزايا أو الصفحات التي يتفاعل معها
+- منطقة الأطفال والموارد التعليمية.
+- صفحة التخطيط للزيارة.
+- قسم الأحداث أو الإعلانات الموجهة للعائلات.
 
-## Pain Points, Needs, and Expectations
-- Needs clarity on age suitability, supervision requirements, and accessibility.
-- Expects concise directions and on-site amenities (restrooms, food, accessibility routes).
-- Wants printable or shareable information for coordinating with other adults.
+## الاحتياجات والتوقعات
+- لغة واضحة وصديقة للعائلة مع صور وأيقونات مناسبة.
+- معلومات محدثة حول الأمان، المرافق، وسهولة الوصول للأطفال.
+- خطوات سهلة للوصول إلى المحتوى دون تعقيد.
 
-## Permissions and Limitations
-- Read-only access; cannot publish or manage events.
-- May initiate contact for bookings but relies on provided instructions.
+## التحديات المحتملة
+- عدم وجود محتوى تفاعلي أو حجوزات إلكترونية مباشرة.
+- حاجة مستمرة لتحديث المعلومات التعليمية والأحداث.
 
-## How the System Helps
-- Presents a dedicated Kids Zone entry point to surface children-focused material quickly.
-- Uses consistent asset paths and navigation so parents can move between events, plans, and booking without confusion.
-- Centralizes museum visit guidance to simplify planning for families or schools.
+## كيف يساعد النظام في تحقيق أهدافه
+- يقدم صفحات مصممة بخطوط واضحة ومكونات ثابتة تسهل القراءة.
+- يربط بين التخطيط والأنشطة في مسارات محددة مما يقلل الحيرة.
+- يتيح معلومات مركزة للزوار العائليين دون الحاجة للبحث المطول.

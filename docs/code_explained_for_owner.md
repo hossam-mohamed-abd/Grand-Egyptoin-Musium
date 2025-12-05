@@ -1,99 +1,48 @@
-# Code Explained for the Project Owner
+# شرح تفصيلي للشفرة
 
-This document walks through how the Grand Egyptian Museum web experience is structured, how requests are handled, and how to extend or modify the code safely.
+## نظرة عامة على عمل المشروع
+المشروع هو موقع ثابت يعتمد على PHP بهيكل MVC مبسط. جميع الطلبات تمر عبر متحكم أمامي في `public/index.php` يقوم بتحميل الإعدادات، ثم يوجّه الطلبات من خلال موجه مخصص في `app/core/Router.php`. يقوم الموجه بربط المسارات بقوالب PHP داخل `app/views/` مع استخدام مكونات مشتركة للأجزاء المتكررة في الواجهة. الأصول الثابتة (CSS وJS وصور) مخزنة في `public/assets` ويتم ربطها عبر ثابت `ASSETS` لضمان مسارات صحيحة في بيئات مختلفة.
 
-## High-Level Overview
-- The application is a lightweight PHP site organized in an MVC-style layout without a database or API layer.
-- `public/index.php` is the single entry point. It loads configuration constants, builds the router, and dispatches incoming requests.
-- Routes defined in `app/routes.php` map URL paths to PHP view templates under `app/views/`.
-- Shared UI pieces (navbar, footer, sections) live in `app/views/components/` and are included by individual pages.
-- Static assets (CSS, JS, images) are served from `public/assets/` and referenced with the `ASSETS` constant.
+## شرح الملفات الرئيسية
+- **`public/index.php`**: نقطة الدخول لكل الطلبات. تحمّل الإعدادات من `app/config/config.php`، تهيئ الموجه، وتستدعي تعريفات المسارات من `app/routes.php` قبل تنفيذ التوجيه.
+- **`app/config/config.php`**: يحتوي ثوابت المشروع مثل `BASE_URL`، مسار التطبيق `APP_PATH`، مسار القوالب `VIEW_PATH`، ومسار الأصول `ASSETS`. تعديل هذه القيم يحدد كيفية بناء الروابط وتشغيل الموقع في بيئات متعددة.
+- **`app/core/Router.php`**: فئة بسيطة تتولى تسجيل المسارات عبر دوال `get` و`post`. تحتفظ بالمصفوفات التي تربط المسارات بوظائف استجابة أو ملفات قوالب، ثم تتولى اختيار الاستجابة المناسبة بناءً على طريقة الطلب والمسار.
+- **`app/core/Controller.php`**: فئة أساسية توفر دالة `render($view, $data = [])` التي تستخرج المتغيرات من المصفوفة `$data` ثم تتضمن ملف القالب المطلوب. مفيدة عند بناء وحدات تحكم مستقبلية.
+- **`app/routes.php`**: يسجل المسارات باستخدام الموجه. في النسخة الحالية يتم توجيه المسارات مباشرة إلى ملفات القوالب أو الاستجابات البسيطة.
+- **`app/views/`**: يحتوي ملفات القوالب لكل صفحة. هناك مجلدات فرعية مثل `booking/`، `Kids-Zone/`، `Collections/`، و`Donate/` لكل قسم، بالإضافة إلى مجلد `components/` الذي يضم الرأس والتذييل وأي أجزاء مشتركة أخرى.
+- **`public/assets/`**: يشمل ملفات الستايل والسكربتات والصور. يتم الوصول إليها عبر ثابت `ASSETS` لتجنب الروابط المطلقة في القوالب.
 
-## Core Modules and How They Work
-### Configuration (`app/config/config.php`)
-- Defines the base URL and important paths:
-  - `BASE_URL`: URL prefix for links and assets. Must match how the site is hosted (e.g., `/` locally or `/GEM_mvc/public/` on a subdirectory).
-  - `APP_PATH`: Filesystem path to the `app/` directory.
-  - `VIEW_PATH`: Filesystem path to `app/views/` for including templates.
-  - `ASSETS`: Public URL to static assets (`BASE_URL . 'assets/'`).
-- **Important:** The file currently contains unresolved merge markers with two different `BASE_URL` values. Resolve this by keeping only the correct constant block for your deployment.
+## تدفق البيانات داخل المشروع
+1. يتلقى الخادم الطلب ويوجهه إلى `public/index.php` بفضل إعدادات الخادم أو ملف `.htaccess` (إن وجد).
+2. يقوم `index.php` بتحميل الإعدادات ثم إنشاء كائن من `Router`.
+3. يتم تحميل ملف `app/routes.php` الذي يسجّل جميع المسارات باستخدام الموجه.
+4. عند تنفيذ `Router->dispatch()`, يحدد الموجه المسار والتابع المناسبين ويشغلهما.
+5. إذا كان المسار مرتبطًا بقالب، يتم تضمينه عبر `render` (عند استخدام وحدات تحكم) أو مباشرة من ملف المسارات، ليتم إنتاج HTML النهائي للمستخدم.
 
-### Router (`app/core/Router.php`)
-- Stores route handlers in an associative array grouped by HTTP method.
-- Public methods:
-  - `get($path, $handler)` and `post($path, $handler)` register routes for GET/POST requests.
-  - `dispatch($uri, $method)`: Normalizes the incoming path, finds the matching handler, and executes it. If no route exists, it returns a 404 status and message.
-- Normalization trims trailing slashes, respects a configured base path, and ensures consistent leading slashes.
-- Because handlers are callables, you can inline `require` statements for views or call controller methods for more complex logic.
+## منطق أو خوارزميات مهمة
+- **التوجيه البسيط**: يعتمد على مطابقة نصية للمسار وطريقة الطلب، دون تحليل معقد للمعاملات. هذا يسهّل الإعداد لكنه يتطلب تعريفًا صريحًا لكل مسار.
+- **إدارة الأصول**: استخدام الثوابت `BASE_URL` و`ASSETS` يضمن تكوين الروابط بشكل صحيح حتى عند تغيير مسار النشر.
 
-### Controller Base Class (`app/core/Controller.php`)
-- Provides a single helper method `render($view, $data = [])` that extracts an associative array into scoped variables and requires the given view file using `VIEW_PATH`.
-- Use this as a parent class when adding controllers that need to pass data into templates.
+## كيفية التعديل أو التوسيع
+- **إضافة صفحة جديدة**: أنشئ قالبًا في `app/views/<folder>/page.php` أو مباشرة تحت `views/`. أضف المسار في `app/routes.php` باستخدام `$router->get('/path', function () { include VIEW_PATH . '...'; });` أو عبر استدعاء وحدة تحكم تستخدم `render`.
+- **توسيع الموجه**: يمكن تعديل `Router.php` لإضافة دعم للوسائط المتعددة، المعاملات الديناميكية، أو صفحات خطأ مخصصة.
+- **إضافة منطق عمل**: أنشئ فئة متحكم جديدة تمتد من `Controller` لحقن بيانات في القوالب أو تنفيذ عمليات قبل العرض.
+- **إدارة الأصول**: ضع الملفات تحت `public/assets` واستخدم الثابت `ASSETS` داخل القوالب لربطها.
 
-### Routes (`app/routes.php`)
-- Builds a `Router` instance (intended to use `BASE_URL` as the base path) and registers mappings such as `/`, `/kids-zone`, `/booking`, `/collections`, `/plans`, `/donate`, `/event-details`, and `/login`.
-- Each route currently just includes a corresponding view file.
-- **Note:** This file also has merge markers around router initialization; ensure the base path matches the value in `config.php`.
+## ملاحظات وتحذيرات للمطورين
+- تأكد من ضبط `BASE_URL` قبل النشر لتجنب روابط مكسورة، خاصة عند استضافة الموقع في مجلد فرعي.
+- بعض الملفات قد تحتوي على تعارضات دمج سابقة؛ يوصى بمراجعتها وإزالة أي علامات تعارض قبل الدفع للإنتاج.
+- لا توجد طبقة أمان أو تحقق من المدخلات، لذلك أي مدخلات ديناميكية مستقبلية يجب أن تمر عبر فلاتر وتنقية مناسبة.
+- غياب الاختبارات الآلية يعني ضرورة اختبار المسارات يدويًا بعد أي تعديل.
 
-### Views and Components (`app/views/`)
-- Page-level templates are grouped by feature:
-  - `home.php` provides the main landing experience, linking to events, collections, plans, and donation prompts.
-  - Subfolders like `booking/`, `Collections/`, `Donate/`, `Kids-Zone/`, `plans/`, and `event-details/` hold dedicated page templates.
-  - `components/` contains reusable elements (e.g., navbar, footer, section styles) included via PHP `include`.
-- Templates reference assets with `<?= ASSETS ?>` to keep links environment-agnostic.
-
-### Entry Point (`public/index.php`)
-- Loads configuration and routes, then calls `$router->dispatch()` with the current request URI and method.
-- Contains merge markers but otherwise mirrors the route dispatch call found in `app/routes.php`.
-
-## Data Flow
-1. **Incoming request** hits `public/index.php` (document root).
-2. Configuration constants are loaded, then `app/routes.php` is required to build the router.
-3. `Router::dispatch()` normalizes the URI against any base path and matches a route handler.
-4. The handler executes (typically a closure requiring a view file). Optional controllers could render views with data.
-5. The view outputs HTML that references assets in `public/assets/` via the `ASSETS` URL prefix.
-
-## Key Logic and Algorithms
-- **Path Normalization:** In `Router::normalizePath()`, the path is ensured to start with `/`, trimmed of trailing slashes, and, if a custom base path is set, that prefix is removed so routing remains consistent regardless of deployment directory.
-- **Dispatch Resolution:** Routes are stored by HTTP method and normalized path. The dispatcher checks `routes[$method][$path]`; if not found, it sets HTTP 404 and echoes a fallback message.
-
-## Adding New Features
-- **New Page:**
-  1. Create a view template under `app/views/<feature>/<page>.php`.
-  2. Register a route in `app/routes.php` using `$router->get('/your-path', function () { require VIEW_PATH . '<feature>/<page>.php'; });`.
-  3. Link to the new path from existing navigation (e.g., navbar component) using `BASE_URL` for consistency.
-- **New Controller Logic:**
-  1. Create a PHP class extending `Controller` in a new file under `app/controllers/` (folder can be created as needed).
-  2. Add methods that gather data and call `$this->render('path/to/view.php', ['key' => $value]);`.
-  3. Update routes to point to the controller method instead of an inline closure.
-- **Asset Updates:** Place CSS/JS/images inside `public/assets/` and reference them in views with `<?= ASSETS ?>path/to/file`.
-
-## Common Pitfalls and Edge Cases
-- **Unresolved Merge Conflicts:** `app/config/config.php`, `app/routes.php`, and `public/index.php` include Git conflict markers. Remove these and keep only the correct configuration for your hosting path.
-- **BASE_URL Mismatch:** If `BASE_URL` does not match the deployed subdirectory, links and assets will break. Always adjust this constant when hosting under a subfolder.
-- **Trailing Slash Variations:** The router normalizes paths, but registering routes with inconsistent slashes can still cause confusion. Prefer registering canonical paths without trailing slashes.
-- **Missing Error Pages:** The router returns a plain "404 Not Found" string. Consider adding a friendly error view.
-
-## Extending Safely
-- Keep routes and views organized; group new features in their own subfolders under `app/views/`.
-- When adding controllers, namespace them and autoload if the project grows; for now, manual `require` statements suffice.
-- Introduce basic tests or manual checklists to verify that navigation works after updates (home links, events, plans, donate, login).
-- Document any new configuration flags or dependencies directly in `README.md` for future maintainers.
-
-## Pseudo-code Reference
-```php
-// Example of adding a controller-driven page
-class EventsController extends Controller {
-    public function index(): void {
-        $events = [ /* fetch or define events */ ];
-        $this->render('events/index.php', ['events' => $events]);
-    }
-}
-
-$router->get('/events', function () {
-    $controller = new EventsController();
-    $controller->index();
-});
-```
-
-By following the patterns above and resolving the configuration conflicts, you can extend the site with new pages, data-driven features, and cleaner navigation while keeping the codebase approachable.
+## أمثلة أو توضيحات
+- **رسم نصي لتدفق الطلب**:
+  ```
+  متصفح → خادم الويب → public/index.php → Router → القالب في app/views → HTML الناتج
+  ```
+- **مثال مسار بسيط** في `app/routes.php`:
+  ```php
+  $router->get('/donate', function () {
+      include VIEW_PATH . 'Donate/donate.php';
+  });
+  ```
