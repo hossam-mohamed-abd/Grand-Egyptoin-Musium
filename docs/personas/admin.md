@@ -1,34 +1,35 @@
-# Site Administrator
+# شخصية: مدير النظام
 
-## Role
-Museum staff responsible for publishing and maintaining website content, events, and media.
+## الدور ومن هو
+مسؤول تقني يشرف على تشغيل الموقع واستقراره، ويضمن إعداد الخادم والأمان وتكامل الأصول.
 
-## Goals
-- Ensure pages show accurate schedules, pricing, and contact information.
-- Publish or update events, collection highlights, and donation campaigns.
-- Verify navigation, assets, and links remain functional after updates.
+## الأهداف عند استخدام النظام
+- الحفاظ على توافر الموقع وسرعة الاستجابة.
+- ضبط المسارات وقيم `BASE_URL` لتناسب بيئات النشر المختلفة.
+- مراقبة الأخطاء وتطبيق التصحيحات بسرعة.
 
-## Typical Journey
-1. Reviews live pages (home, events, plans, booking) for accuracy.
-2. Updates view templates or assets in the repository to reflect new information.
-3. Tests routing paths locally to confirm links resolve correctly.
-4. Coordinates with designers or developers when new components are needed.
+## سير العمل المعتاد
+1. مراجعة ملفات التهيئة في `app/config/config.php` قبل النشر.
+2. تشغيل الخادم أو تهيئة الاستضافة لتوجيه الطلبات إلى `public/index.php`.
+3. التحقق من تحميل الأصول الثابتة من `public/assets` بشكل سليم.
+4. مراقبة السجلات والاستجابة للحوادث.
 
-## Features Interacted With
-- All view templates under `app/views/` and shared components.
-- Static assets in `public/assets/` (images, CSS).
-- Routing definitions in `app/routes.php` when adding new pages.
+## المزايا أو الصفحات التي يتفاعل معها
+- ملفات التهيئة في `app/config`.
+- الموجه في `app/core/Router.php` للتأكد من المسارات.
+- الأصول تحت `public/assets/` لضبط صلاحيات الوصول والتخزين المؤقت.
 
-## Pain Points, Needs, and Expectations
-- Wants a straightforward way to update content without breaking layout or links.
-- Needs clarity on the correct `BASE_URL` for deployments to avoid broken assets.
-- Expects a preview or staging environment before pushing changes live.
+## الاحتياجات والتوقعات
+- وثائق واضحة للمسارات والتهيئة.
+- قدرة على تخصيص عناوين الأصول والمسارات بسهولة.
+- آلية بسيطة لمعالجة الأخطاء وإرجاع صفحات 404 أو رسائل ودية.
 
-## Permissions and Limitations
-- Repository write access; can modify templates and assets.
-- Not responsible for backend feature development beyond content updates.
+## التحديات المحتملة
+- تعارض قيم `BASE_URL` بين البيئات المختلفة.
+- غياب اختبارات تلقائية قد يصعب كشف المشكلات مبكرًا.
+- إدارة الأذونات على الخادم لضمان تحميل الأصول.
 
-## How the System Helps
-- Simple folder structure makes it easy to locate pages and shared components.
-- Constants for `BASE_URL` and asset paths keep links consistent across deployments.
-- Minimal router simplifies adding or adjusting routes for new content.
+## كيف يساعد النظام في تحقيق أهدافه
+- هيكل MVC مبسط يجعل مواقع الأعطال واضحة ومحددة.
+- توحيد مسارات الأصول عبر ثابت `ASSETS` يقلل أخطاء الروابط.
+- إمكانية توجيه كل الطلبات عبر متحكم أمامي واحد يسهل تطبيق قواعد الأمان.

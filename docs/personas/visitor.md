@@ -1,38 +1,35 @@
-# Museum Visitor
+# شخصية: الزائر العادي
 
-## Role
-A general visitor exploring the Grand Egyptian Museum website to plan a trip and browse exhibitions.
+## الدور ومن هو
+شخص مهتم بالمتحف يريد استكشاف المعارض والتخطيط لزيارة أو التعرف على الأحداث والأنشطة المتاحة.
 
-## Goals
-- Discover current and upcoming events worth attending.
-- Plan a visit with practical information before arriving.
-- Preview key collections and exhibits.
-- Find booking or ticketing guidance.
+## الأهداف عند استخدام النظام
+- التعرف على المعارض والأحداث الحالية.
+- معرفة مواعيد الزيارة وأسعار التذاكر أو إرشادات الدخول.
+- الوصول إلى محتوى مناسب للعائلة أو الأطفال.
 
-## Typical Journey
-1. Lands on the homepage and scans the hero highlights.
-2. Checks "Upcoming Events" and opens individual event details.
-3. Uses "Plan Your Visit" to review schedules and visitor tips.
-4. Visits "Collections" to preview artifacts and galleries.
-5. Proceeds to the booking page for next steps or contact information.
+## سير العمل المعتاد
+1. زيارة الصفحة الرئيسية لاستعراض الملخص.
+2. النقر على قسم الأحداث لمعرفة التفاصيل أو التسجيل.
+3. الانتقال إلى صفحة التخطيط أو الحجز لمعرفة التعليمات العملية.
+4. زيارة منطقة الأطفال لمحتوى العائلة عند الحاجة.
 
-## Features Interacted With
-- Home page hero, events grid, and collection previews.
-- Plans page for visit logistics.
-- Booking page for ticket guidance.
-- Event details view for deeper information.
+## المزايا أو الصفحات التي يتفاعل معها
+- الصفحة الرئيسية وقسم الأحداث.
+- صفحة التخطيط للزيارة `/plans` وصفحة الحجز `/booking`.
+- منطقة الأطفال `/kids-zone`.
+- صفحة التبرع لدعم المتحف.
 
-## Pain Points, Needs, and Expectations
-- Wants clear navigation between events, planning, and booking without dead links.
-- Expects mobile-friendly layouts and fast loading of media-heavy sections.
-- Needs accurate dates, times, and pricing where applicable.
-- Frustrated by missing or outdated event information.
+## الاحتياجات والتوقعات
+- واجهة بسيطة وسريعة الاستجابة.
+- معلومات واضحة عن المواعيد والموقع والتكلفة.
+- روابط صحيحة وصور وأصول تعمل دون أخطاء.
 
-## Permissions and Limitations
-- Read-only access to public pages; no account or admin privileges.
-- Cannot modify content or manage bookings directly.
+## التحديات المحتملة
+- عدم وجود محتوى ديناميكي قد يجعل المعلومات غير محدثة.
+- الاعتماد على محتوى ثابت بدون نماذج تفاعلية للحجز.
 
-## How the System Helps
-- Provides a concise landing page funneling visitors toward events, plans, and booking resources.
-- Uses consistent navigation and shared components to keep orientation clear across pages.
-- Highlights featured events and collections to inspire an in-person visit.
+## كيف يساعد النظام في تحقيق أهدافه
+- يقدم صفحات مرتبة تسمح بالوصول المباشر إلى الأقسام الرئيسية.
+- يوفر مكونات تصميم متسقة تسهل التنقل وتزيد الثقة.
+- يتيح متابعة مسارات واضحة للزيارة أو الاطلاع على الأحداث.
