@@ -93,7 +93,12 @@ A lightweight PHP-based web experience for the Grand Egyptian Museum that showca
 - For more complex features, introduce controllers that extend `Controller` and use `render()` to pass data into views.
 
 ## Authors & Credits
-- Project contributors: Grand Egyptian Museum web team and collaborators.
+- Project contributors: 
+   Eng.hossam Mohamed
+   Eng.mohamed Sayed
+   Eng.Abd-alrahman Ahmed
+   Eng.Ahmed Goda
+   Eng.Milad hany
 
 ## License
 - Specify the project license here (e.g., MIT); add a `LICENSE` file to formalize.
