@@ -87,8 +87,18 @@
 - تحسين صفحات الخطأ وإضافة اختبارات آلية لسلامة المسارات والقوالب.
 - معالجة أي علامات دمج متبقية في الملفات وضبط `BASE_URL` بشكل موحد.
 
+
 ## الشكر والتقدير
 - فريق تجربة الويب لمتحف مصر الكبير وكل المساهمين في المشروع.
+=======
+## Authors & Credits
+- Project contributors: 
+   Eng.hossam Mohamed
+   Eng.mohamed Sayed
+   Eng.Abd-alrahman Ahmed
+   Eng.Ahmed Goda
+   Eng.Milad hany
+
 
 ## الترخيص
 - يرجى تحديد رخصة المشروع (مثل MIT) وإضافة ملف `LICENSE` عند اعتمادها.
