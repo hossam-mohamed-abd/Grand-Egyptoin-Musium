@@ -2,12 +2,8 @@
 require_once APP_PATH . '/core/Router.php';
 require_once APP_PATH . '/core/Controller.php';
 
-<<<<<<< HEAD
 // المسار الجديد للـ Router
-$router = new Router('/GEM_mvc/public');
-=======
-$router = new Router(BASE_URL);
->>>>>>> 69d50687bdaa8b564b0b892cf1e4d3aa79f9bf58
+$router = new Router('http://gem.local/');
 
 $router->get('/', function () {
     require VIEW_PATH . 'home.php';
@@ -41,8 +37,4 @@ $router->get('/login', function () {
     require VIEW_PATH . 'regestration/login/login.php';
 });
 
-<<<<<<< HEAD
 return $router;
-=======
-return $router;
->>>>>>> 69d50687bdaa8b564b0b892cf1e4d3aa79f9bf58

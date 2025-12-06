@@ -1,13 +1,6 @@
-RewriteEngine On
-<<<<<<< HEAD
-RewriteBase /GEM_mvc/public/
+// RewriteEngine On
+// RewriteBase /GEM_mvc/public/
 
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [QSA,L]
-=======
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
->>>>>>> 69d50687bdaa8b564b0b892cf1e4d3aa79f9bf58
+// RewriteCond %{REQUEST_FILENAME} !-f
+// RewriteCond %{REQUEST_FILENAME} !-d
+// RewriteRule ^(.*)$ index.php [QSA,L]
