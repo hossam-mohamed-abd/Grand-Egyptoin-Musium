@@ -58,7 +58,7 @@ A lightweight PHP web experience that showcases exhibits, events, visit planning
    cd Grand-Egyptoin-Musium
    ```
 3. **Configure the base URL (if needed):**
-   - Open `app/config/config.php` and set `BASE_URL` to match your hosting path (e.g., `'/'` for root or `'/GEM_mvc/public/'` for a subdirectory).
+   - Open `app/config/config.php` and set `BASE_URL` to match your hosting path (e.g., `http://gem.local/` for a local virtual host or `'/'` for a root deployment).
    - Ensure your web server points its document root to the `public/` directory.
 
 ## How to Run
@@ -78,7 +78,7 @@ A lightweight PHP web experience that showcases exhibits, events, visit planning
 - **Support the museum:** Visit `/donate` to explore donation options.
 
 ## Routing & Components Overview
-- **Router usage:** Routes are registered in `app/routes.php` using `$router->get('/path', function () { ... });`. The router normalizes paths relative to `BASE_URL` so links remain consistent when deployed in subdirectories.
+- **Router usage:** Routes are registered in `app/routes.php` using `$router->get('/path', function () { ... });`. The router normalizes paths relative to `BASE_URL` (e.g., `http://gem.local/`) so links remain consistent when deployed in subdirectories or behind virtual hosts.
 - **View rendering:** Page templates include shared components from `app/views/components/` to keep navigation and footer consistent. The base `Controller` class exposes a `render($view, $data = [])` helper for future controllers.
 
 ## Future Improvements

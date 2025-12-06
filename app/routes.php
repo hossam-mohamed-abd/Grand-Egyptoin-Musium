@@ -3,7 +3,7 @@ require_once APP_PATH . '/core/Router.php';
 require_once APP_PATH . '/core/Controller.php';
 
 // المسار الجديد للـ Router
-$router = new Router('http://gem.local/');
+$router = new Router(BASE_URL);
 
 $router->get('/', function () {
     require VIEW_PATH . 'home.php';
