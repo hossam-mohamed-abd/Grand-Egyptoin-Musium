@@ -7,7 +7,10 @@ class Router
 
     public function __construct(string $basePath = '/')
     {
-        $this->basePath = rtrim($basePath, '/');
+        $parsedPath = parse_url($basePath, PHP_URL_PATH);
+        $normalizedBase = $parsedPath === null ? $basePath : $parsedPath;
+
+        $this->basePath = rtrim($normalizedBase, '/') ?: '/';
     }
 
     public function get(string $path, callable $handler): void
